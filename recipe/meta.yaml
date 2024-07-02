@@ -10,16 +10,20 @@ source:
   sha256: d38ce54f9f46d2c76c68d0b4a2c39d3a5e42ada2e2aebfea2eef5a44e95c8926
 
 build:
-  noarch: python
   script: {{ PYTHON }} -m pip install . -vv
   number: 0
 
 requirements:
+  build:
+    - python
+    - matplotlib-base
+    - numpy
+    - scipy
   host:
-    - python >=3.7
+    - python
     - pip
   run:
-    - python >=3.7
+    - python
     - matplotlib-base
     - numpy
     - scipy
