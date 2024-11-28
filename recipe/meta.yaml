@@ -1,5 +1,5 @@
 {% set name = "iwopy" %}
-{% set version = "0.3.0.2" %}
+{% set version = "0.3.1" %}
 {% set python_min = "3.8" %}
 
 package:
@@ -8,12 +8,12 @@ package:
 
 source:
   url: https://github.com/FraunhoferIWES/iwopy/archive/v{{ version }}.tar.gz
-  sha256: cea8d8092d1f47b1ad839ec60e4de8f72b32c8134351d8b9d20d7ef499e8d69b
+  sha256: 30181944369d7193afd47a81a45550acaeaa50931ac4bf0114e0dedc08c381e4
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 1
+  number: 0
 
 requirements:
   host:
