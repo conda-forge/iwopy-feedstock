@@ -1,6 +1,5 @@
 {% set name = "iwopy" %}
 {% set version = "0.5.0" %}
-{% set python_min = "3.10" %}
 
 package:
   name: {{ name|lower }}
@@ -38,6 +37,7 @@ test:
     - pygmo >=2.19
   source_files:
     - tests
+    - examples/callbacks
   commands:
     - pip check
     - pytest tests
