@@ -1,6 +1,5 @@
 {% set name = "iwopy" %}
-{% set version = "0.4.0" %}
-{% set python_min = "3.10" %}
+{% set version = "0.5.0" %}
 
 package:
   name: {{ name|lower }}
@@ -8,7 +7,7 @@ package:
 
 source:
   url: https://github.com/FraunhoferIWES/iwopy/archive/v{{ version }}.tar.gz
-  sha256: 6f409dd1c8a0d854aca9db7e5dd6d4633b5f5355efacd532af4c476419f2bb39
+  sha256: f2e68f909ce1ca982d8287a75e8b61f926c421b64d635d18a344ea2272d37ecc
 
 build:
   noarch: python
@@ -18,13 +17,14 @@ build:
 requirements:
   host:
     - python {{ python_min }}
-    - setuptools
     - pip
+    - setuptools >=84.0.0
+    - wheel
   run:
     - python >={{ python_min }}
-    - matplotlib-base
-    - numpy
-    - scipy
+    - matplotlib-base >=3.8
+    - numpy >=1.26
+    - scipy >=1.12
 
 test:
   imports:
@@ -32,10 +32,12 @@ test:
   requires:
     - python {{ python_min }}
     - pip
-    - pytest
-    - pymoo
+    - pytest >=9.0.3
+    - pymoo >=0.6
+    - pygmo >=2.19
   source_files:
     - tests
+    - examples/callbacks
   commands:
     - pip check
     - pytest tests
@@ -47,7 +49,7 @@ about:
     The iwopy package is a meta package that provides interfaces to
     other open-source Python optimization packages out there. It can
     thus be understood as an attempt to provide the best of all worlds
-    when it comes to solving optimization problems with Python. All 
+    when it comes to solving optimization problems with Python. All
     the credit for implementing the invoked optimizers goes to the
     original package providers.
   license: MIT
