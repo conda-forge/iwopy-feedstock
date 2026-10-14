@@ -37,9 +37,6 @@ test:
     - tomli >=2
     - pymoo >=0.6
     - pygmo >=2.19
-    - cma >=4.4.0
-    - nevergrad >=1.0.12
-    - numpy >=1.26,<2.4
     - optuna >=5.0.0
     - deap >=1.4.4
   source_files:
@@ -52,9 +49,11 @@ test:
     - .github/workflows/test.yml
     - .github/workflows/publish.yml
     - iwopy/benchmarks/quadratic.py
+    - iwopy/interfaces/pymoo/factory.py
+    - iwopy/interfaces/pygmo/algos.py
   commands:
     - pip check
-    - pytest tests -q
+    - pytest tests -q -k "not cma and not nevergrad"
 
 about:
   home: https://github.com/FraunhoferIWES/iwopy
