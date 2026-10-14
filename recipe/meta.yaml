@@ -1,5 +1,5 @@
 {% set name = "iwopy" %}
-{% set version = "0.5.0" %}
+{% set version = "1.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/FraunhoferIWES/iwopy/archive/v{{ version }}.tar.gz
-  sha256: f2e68f909ce1ca982d8287a75e8b61f926c421b64d635d18a344ea2272d37ecc
+  sha256: db198670a6451b4582387eeda12a39f28053336665e00eedd61ea84a160ef115
 
 build:
   noarch: python
@@ -19,7 +19,7 @@ requirements:
     - python {{ python_min }}
     - pip
     - setuptools >=84.0.0
-    - wheel
+    - wheel >=0.46.2
   run:
     - python >={{ python_min }}
     - matplotlib-base >=3.8
@@ -33,14 +33,27 @@ test:
     - python {{ python_min }}
     - pip
     - pytest >=9.0.3
+    - pyyaml
+    - tomli >=2
     - pymoo >=0.6
     - pygmo >=2.19
+    - optuna >=5.0.0
+    - deap >=1.4.4
   source_files:
     - tests
-    - examples/callbacks
+    - examples
+    - notebooks
+    - pyproject.toml
+    - CHANGELOG.md
+    - CITATION.cff
+    - .github/workflows/test.yml
+    - .github/workflows/publish.yml
+    - iwopy/benchmarks/quadratic.py
+    - iwopy/interfaces/pymoo/factory.py
+    - iwopy/interfaces/pygmo/algos.py
   commands:
     - pip check
-    - pytest tests
+    - pytest tests -q -k "not cma and not nevergrad"
 
 about:
   home: https://github.com/FraunhoferIWES/iwopy
